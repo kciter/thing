@@ -86,6 +86,11 @@ fun ValidationBuilder<String>.pattern(pattern: Regex) =
     pattern.toString()
   ) { it.matches(pattern) }
 
+fun ValidationBuilder<String>.email() =
+  addConstraint("must be a valid email address") {
+    "[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}".toRegex().matches(it)
+  }
+
 inline fun <reified T> ValidationBuilder<T>.minItems(minSize: Int): Constraint<T> =
   addConstraint(
     "must have at least {0} items",
