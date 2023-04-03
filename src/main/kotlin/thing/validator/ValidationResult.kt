@@ -10,16 +10,16 @@ interface ValidationError {
 internal data class PropertyValidationError(
   override val dataPath: String,
   override val message: String
-) : ValidationError {
+): ValidationError {
   override fun toString(): String {
     return "RuleError(dataPath=$dataPath, message=$message)"
   }
 }
 
-interface ValidationErrors : List<ValidationError>
+interface ValidationErrors: List<ValidationError>
 
-internal object NoValidationErrors : ValidationErrors, List<ValidationError> by emptyList()
-internal class DefaultValidationErrors(private val errors: List<ValidationError>) : ValidationErrors,
+internal object NoValidationErrors: ValidationErrors, List<ValidationError> by emptyList()
+internal class DefaultValidationErrors(private val errors: List<ValidationError>): ValidationErrors,
   List<ValidationError> by errors {
   override fun toString(): String {
     return errors.toString()
@@ -33,7 +33,7 @@ sealed class ValidationResult<out T> {
 
   data class Invalid<T>(
     internal val internalErrors: Map<String, List<String>>
-  ) : ValidationResult<T>() {
+  ): ValidationResult<T>() {
 
     override fun get(vararg propertyPath: Any): List<String>? =
       internalErrors[propertyPath.joinToString("", transform = ::toPathSegment)]
@@ -61,7 +61,7 @@ sealed class ValidationResult<out T> {
     }
   }
 
-  data class Valid<T>(val value: T) : ValidationResult<T>() {
+  data class Valid<T>(val value: T): ValidationResult<T>() {
     override fun get(vararg propertyPath: Any): List<String>? = null
     override fun <R> map(transform: (T) -> R): ValidationResult<R> = Valid(transform(this.value))
     override val errors: ValidationErrors

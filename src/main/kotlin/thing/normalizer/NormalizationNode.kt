@@ -3,7 +3,7 @@ package thing.normalizer
 internal class NormalizationNode<T>(
   private val alterations: List<Alteration<T>>,
   private val subNormalization: List<Normalization<T>>
-) : Normalization<T> {
+): Normalization<T> {
   override fun normalize(value: T): T {
     val subValidationResult = applySubNormalizations(value)
     return localNormalization(subValidationResult)

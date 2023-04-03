@@ -13,7 +13,7 @@ interface Normalization<T> {
 
 internal class IterableNormalization<T>(
   private val normalization: Normalization<T>
-) : Normalization<Iterable<T>> {
+): Normalization<Iterable<T>> {
   override fun normalize(value: Iterable<T>): Iterable<T> {
     return value.map {
       normalization.normalize(it)
@@ -23,7 +23,7 @@ internal class IterableNormalization<T>(
 
 internal class ArrayNormalization<T>(
   private val normalization: Normalization<T>
-) : Normalization<Array<T>> {
+): Normalization<Array<T>> {
   override fun normalize(value: Array<T>): Array<T> {
     value.forEach {
       normalization.normalize(it)
@@ -34,7 +34,7 @@ internal class ArrayNormalization<T>(
 
 internal class MapNormalization<K, V>(
   private val normalization: Normalization<Map.Entry<K, V>>
-) : Normalization<Map<K, V>> {
+): Normalization<Map<K, V>> {
   override fun normalize(value: Map<K, V>): Map<K, V> {
     value.asSequence().map {
       normalization.normalize(it)

@@ -19,7 +19,7 @@ open class ValidationBuilder<T> {
     private data class SingleValuePropKey<T, R>(
       val property: KProperty1<T, R>,
       val modifier: PropModifier
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: ValidationBuilder<*>): Validation<T> {
         @Suppress("UNCHECKED_CAST")
         val validations = (builder as ValidationBuilder<R>).build()
@@ -34,7 +34,7 @@ open class ValidationBuilder<T> {
     private data class IterablePropKey<T, R>(
       val property: KProperty1<T, Iterable<R>>,
       val modifier: PropModifier
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: ValidationBuilder<*>): Validation<T> {
         @Suppress("UNCHECKED_CAST")
         val validations = (builder as ValidationBuilder<R>).build()
@@ -50,7 +50,7 @@ open class ValidationBuilder<T> {
     private data class ArrayPropKey<T, R>(
       val property: KProperty1<T, Array<R>>,
       val modifier: PropModifier
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: ValidationBuilder<*>): Validation<T> {
         @Suppress("UNCHECKED_CAST")
         val validations = (builder as ValidationBuilder<R>).build()
@@ -66,7 +66,7 @@ open class ValidationBuilder<T> {
     private data class MapPropKey<T, K, V>(
       val property: KProperty1<T, Map<K, V>>,
       val modifier: PropModifier
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: ValidationBuilder<*>): Validation<T> {
         @Suppress("UNCHECKED_CAST")
         val validations = (builder as ValidationBuilder<Map.Entry<K, V>>).build()
@@ -146,20 +146,20 @@ open class ValidationBuilder<T> {
   }
 }
 
-fun <T : Any> ValidationBuilder<T?>.ifPresent(init: ValidationBuilder<T>.() -> Unit) {
+fun <T: Any> ValidationBuilder<T?>.ifPresent(init: ValidationBuilder<T>.() -> Unit) {
   val builder = ValidationBuilder<T>()
   init(builder)
   run(OptionalValidation(builder.build()))
 }
 
-fun <T : Any> ValidationBuilder<T?>.required(init: ValidationBuilder<T>.() -> Unit) {
+fun <T: Any> ValidationBuilder<T?>.required(init: ValidationBuilder<T>.() -> Unit) {
   val builder = ValidationBuilder<T>()
   init(builder)
   run(RequiredValidation(builder.build()))
 }
 
 @JvmName("onEachIterable")
-infix fun <S, T : Iterable<S>> ValidationBuilder<T>.onEach(init: ValidationBuilder<S>.() -> Unit) {
+infix fun <S, T: Iterable<S>> ValidationBuilder<T>.onEach(init: ValidationBuilder<S>.() -> Unit) {
   val builder = ValidationBuilder<S>()
   init(builder)
   @Suppress("UNCHECKED_CAST")
@@ -175,7 +175,7 @@ infix fun <T> ValidationBuilder<Array<T>>.onEach(init: ValidationBuilder<T>.() -
 }
 
 @JvmName("onEachMap")
-infix fun <K, V, T : Map<K, V>> ValidationBuilder<T>.onEach(init: ValidationBuilder<Map.Entry<K, V>>.() -> Unit) {
+infix fun <K, V, T: Map<K, V>> ValidationBuilder<T>.onEach(init: ValidationBuilder<Map.Entry<K, V>>.() -> Unit) {
   val builder = ValidationBuilder<Map.Entry<K, V>>()
   init(builder)
   @Suppress("UNCHECKED_CAST")

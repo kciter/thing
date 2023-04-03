@@ -14,7 +14,7 @@ open class NormalizationBuilder<T>(val fieldName: String? = null) {
 
     private data class SingleValuePropKey<T, R>(
       val property: KProperty1<T, R>,
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: NormalizationBuilder<*>): Normalization<T> {
         @Suppress("UNCHECKED_CAST")
         return (builder as NormalizationBuilder<T>).build()
@@ -23,7 +23,7 @@ open class NormalizationBuilder<T>(val fieldName: String? = null) {
 
     private data class IterablePropKey<T, R>(
       val property: KProperty1<T, Iterable<R>>,
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: NormalizationBuilder<*>): Normalization<T> {
         @Suppress("UNCHECKED_CAST")
         return (builder as NormalizationBuilder<T>).build()
@@ -32,7 +32,7 @@ open class NormalizationBuilder<T>(val fieldName: String? = null) {
 
     private data class ArrayPropKey<T, R>(
       val property: KProperty1<T, Array<R>>
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: NormalizationBuilder<*>): Normalization<T> {
         @Suppress("UNCHECKED_CAST")
         return (builder as NormalizationBuilder<T>).build()
@@ -41,7 +41,7 @@ open class NormalizationBuilder<T>(val fieldName: String? = null) {
 
     private data class MapPropKey<T, K, V>(
       val property: KProperty1<T, Map<K, V>>
-    ) : PropKey<T> {
+    ): PropKey<T> {
       override fun build(builder: NormalizationBuilder<*>): Normalization<T> {
         @Suppress("UNCHECKED_CAST")
         return (builder as NormalizationBuilder<T>).build()
@@ -103,7 +103,7 @@ open class NormalizationBuilder<T>(val fieldName: String? = null) {
 }
 
 @JvmName("onEachIterable")
-infix fun <S, T : Iterable<S>> NormalizationBuilder<T>.onEach(init: NormalizationBuilder<S>.() -> Unit) {
+infix fun <S, T: Iterable<S>> NormalizationBuilder<T>.onEach(init: NormalizationBuilder<S>.() -> Unit) {
   val builder = NormalizationBuilder<S>(this.fieldName)
   init(builder)
   @Suppress("UNCHECKED_CAST")
@@ -119,7 +119,7 @@ infix fun <T> NormalizationBuilder<Array<T>>.onEach(init: NormalizationBuilder<T
 }
 
 @JvmName("onEachMap")
-infix fun <K, V, T : Map<K, V>> NormalizationBuilder<T>.onEach(init: NormalizationBuilder<Map.Entry<K, V>>.() -> Unit) {
+infix fun <K, V, T: Map<K, V>> NormalizationBuilder<T>.onEach(init: NormalizationBuilder<Map.Entry<K, V>>.() -> Unit) {
   val builder = NormalizationBuilder<Map.Entry<K, V>>(this.fieldName)
   init(builder)
   @Suppress("UNCHECKED_CAST")

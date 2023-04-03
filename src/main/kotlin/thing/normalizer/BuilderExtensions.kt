@@ -137,12 +137,12 @@ fun <T> NormalizationBuilder<List<T>>.takeWhile(predicate: (T) -> Boolean) =
     it.takeWhile(predicate)
   }
 
-fun <T, R : Comparable<R>> NormalizationBuilder<List<T>>.sortedBy(selector: (T) -> R?) =
+fun <T, R: Comparable<R>> NormalizationBuilder<List<T>>.sortedBy(selector: (T) -> R?) =
   addAlteration {
     it.sortedBy(selector)
   }
 
-fun <T, R : Comparable<R>> NormalizationBuilder<List<T>>.sortedByDescending(selector: (T) -> R?) =
+fun <T, R: Comparable<R>> NormalizationBuilder<List<T>>.sortedByDescending(selector: (T) -> R?) =
   addAlteration {
     it.sortedByDescending(selector)
   }

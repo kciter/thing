@@ -3,7 +3,7 @@ package thing.validator
 internal class ValidationNode<T>(
   private val constraints: List<Constraint<T>>,
   private val subValidations: List<Validation<T>>
-) : Validation<T> {
+): Validation<T> {
   override fun validate(value: T): ValidationResult<T> {
     val subValidationResult = applySubValidations(value, keyTransform = { it })
     val localValidationResult = localValidation(value)

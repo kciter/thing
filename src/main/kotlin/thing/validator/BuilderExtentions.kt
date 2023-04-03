@@ -11,7 +11,7 @@ fun <T> ValidationBuilder<T>.oneOf(vararg allowed: T) =
     allowed.joinToString("', '", "'", "'")
   ) { it in allowed }
 
-inline fun <reified T : Enum<T>> ValidationBuilder<String>.oneOf(): Constraint<String> {
+inline fun <reified T: Enum<T>> ValidationBuilder<String>.oneOf(): Constraint<String> {
   val enumNames = enumValues<T>().map { it.name }
   return addConstraint(
     "must be one of: {0}",
@@ -31,34 +31,34 @@ fun <T> ValidationBuilder<T>.notEqual(expected: T) =
     expected?.let { "'$it'" } ?: "null"
   ) { expected != it }
 
-fun <T : Number> ValidationBuilder<T>.maximum(maximumInclusive: Number) =
+fun <T: Number> ValidationBuilder<T>.maximum(maximumInclusive: Number) =
   addConstraint(
     "must be at most '{0}'",
     maximumInclusive.toString()
   ) { it.toDouble() <= maximumInclusive.toDouble() }
 
-fun <T : Number> ValidationBuilder<T>.exclusiveMaximum(maximumExclusive: Number) =
+fun <T: Number> ValidationBuilder<T>.exclusiveMaximum(maximumExclusive: Number) =
   addConstraint(
     "must be less than '{0}'",
     maximumExclusive.toString()
   ) { it.toDouble() < maximumExclusive.toDouble() }
 
-fun <T : Number> ValidationBuilder<T>.minimum(minimumInclusive: Number) =
+fun <T: Number> ValidationBuilder<T>.minimum(minimumInclusive: Number) =
   addConstraint(
     "must be at least '{0}'",
     minimumInclusive.toString()
   ) { it.toDouble() >= minimumInclusive.toDouble() }
 
-fun <T : Number> ValidationBuilder<T>.exclusiveMinimum(minimumExclusive: Number) =
+fun <T: Number> ValidationBuilder<T>.exclusiveMinimum(minimumExclusive: Number) =
   addConstraint(
     "must be greater than '{0}'",
     minimumExclusive.toString()
   ) { it.toDouble() > minimumExclusive.toDouble() }
 
-fun <T : Number> ValidationBuilder<T>.inRange(min: Number, max: Number) =
+fun <T: Number> ValidationBuilder<T>.inRange(min: Number, max: Number) =
   minimum(min) and maximum(max) hint "must be in range '{0}', '{1}'"
 
-fun <T : Number> ValidationBuilder<T>.notInRange(min: Number, max: Number) =
+fun <T: Number> ValidationBuilder<T>.notInRange(min: Number, max: Number) =
   maximum(min) or minimum(max) hint "must not be in range '{0}', '{1}'"
 
 fun ValidationBuilder<String>.minLength(length: Int): Constraint<String> {
@@ -117,10 +117,10 @@ inline fun <reified T> ValidationBuilder<T>.maxItems(maxSize: Int): Constraint<T
     }
   }
 
-inline fun <reified T : Map<*, *>> ValidationBuilder<T>.minProperties(minSize: Int): Constraint<T> =
+inline fun <reified T: Map<*, *>> ValidationBuilder<T>.minProperties(minSize: Int): Constraint<T> =
   minItems(minSize) hint "must have at least {0} properties"
 
-inline fun <reified T : Map<*, *>> ValidationBuilder<T>.maxProperties(maxSize: Int): Constraint<T> =
+inline fun <reified T: Map<*, *>> ValidationBuilder<T>.maxProperties(maxSize: Int): Constraint<T> =
   maxItems(maxSize) hint "must have at most {0} properties"
 
 inline fun <reified T> ValidationBuilder<T>.uniqueItems(unique: Boolean): Constraint<T> =
