@@ -1,4 +1,4 @@
-description = "A rule-based entity management library written in kotlin"
+description = "A rule-based entity management library written in Kotlin"
 
 plugins {
   kotlin("jvm")
