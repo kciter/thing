@@ -18,7 +18,6 @@ internal data class PropertyValidationError(
 
 interface ValidationErrors: List<ValidationError>
 
-internal object NoValidationErrors: ValidationErrors, List<ValidationError> by emptyList()
 internal class DefaultValidationErrors(private val errors: List<ValidationError>): ValidationErrors,
   List<ValidationError> by errors {
   override fun toString(): String {

@@ -1,98 +1,98 @@
 package thing.validator
 
-inline fun <reified T> ValidationBuilder<*>.type() =
-  addConstraint(
+inline fun <reified T> ValidationRuleBuilder<*>.type() =
+  addValidator(
     "must be of the correct type"
   ) { it is T }
 
-fun <T> ValidationBuilder<T>.oneOf(vararg allowed: T) =
-  addConstraint(
+fun <T> ValidationRuleBuilder<T>.oneOf(vararg allowed: T) =
+  addValidator(
     "must be one of: {0}",
     allowed.joinToString("', '", "'", "'")
   ) { it in allowed }
 
-inline fun <reified T: Enum<T>> ValidationBuilder<String>.oneOf(): Constraint<String> {
+inline fun <reified T: Enum<T>> ValidationRuleBuilder<String>.oneOf(): Validator<String> {
   val enumNames = enumValues<T>().map { it.name }
-  return addConstraint(
+  return addValidator(
     "must be one of: {0}",
     enumNames.joinToString("', '", "'", "'")
   ) { it in enumNames }
 }
 
-fun <T> ValidationBuilder<T>.equal(expected: T) =
-  addConstraint(
+fun <T> ValidationRuleBuilder<T>.equal(expected: T) =
+  addValidator(
     "must be {0}",
     expected?.let { "'$it'" } ?: "null"
   ) { expected == it }
 
-fun <T> ValidationBuilder<T>.notEqual(expected: T) =
-  addConstraint(
+fun <T> ValidationRuleBuilder<T>.notEqual(expected: T) =
+  addValidator(
     "must not be {0}",
     expected?.let { "'$it'" } ?: "null"
   ) { expected != it }
 
-fun <T: Number> ValidationBuilder<T>.maximum(maximumInclusive: Number) =
-  addConstraint(
+fun <T: Number> ValidationRuleBuilder<T>.maximum(maximumInclusive: Number) =
+  addValidator(
     "must be at most '{0}'",
     maximumInclusive.toString()
   ) { it.toDouble() <= maximumInclusive.toDouble() }
 
-fun <T: Number> ValidationBuilder<T>.exclusiveMaximum(maximumExclusive: Number) =
-  addConstraint(
+fun <T: Number> ValidationRuleBuilder<T>.exclusiveMaximum(maximumExclusive: Number) =
+  addValidator(
     "must be less than '{0}'",
     maximumExclusive.toString()
   ) { it.toDouble() < maximumExclusive.toDouble() }
 
-fun <T: Number> ValidationBuilder<T>.minimum(minimumInclusive: Number) =
-  addConstraint(
+fun <T: Number> ValidationRuleBuilder<T>.minimum(minimumInclusive: Number) =
+  addValidator(
     "must be at least '{0}'",
     minimumInclusive.toString()
   ) { it.toDouble() >= minimumInclusive.toDouble() }
 
-fun <T: Number> ValidationBuilder<T>.exclusiveMinimum(minimumExclusive: Number) =
-  addConstraint(
+fun <T: Number> ValidationRuleBuilder<T>.exclusiveMinimum(minimumExclusive: Number) =
+  addValidator(
     "must be greater than '{0}'",
     minimumExclusive.toString()
   ) { it.toDouble() > minimumExclusive.toDouble() }
 
-fun <T: Number> ValidationBuilder<T>.inRange(min: Number, max: Number) =
+fun <T: Number> ValidationRuleBuilder<T>.inRange(min: Number, max: Number) =
   minimum(min) and maximum(max) hint "must be in range '{0}', '{1}'"
 
-fun <T: Number> ValidationBuilder<T>.notInRange(min: Number, max: Number) =
+fun <T: Number> ValidationRuleBuilder<T>.notInRange(min: Number, max: Number) =
   maximum(min) or minimum(max) hint "must not be in range '{0}', '{1}'"
 
-fun ValidationBuilder<String>.minLength(length: Int): Constraint<String> {
+fun ValidationRuleBuilder<String>.minLength(length: Int): Validator<String> {
   require(length >= 0) { IllegalArgumentException("minLength requires the length to be >= 0") }
-  return addConstraint(
+  return addValidator(
     "must have at least {0} characters",
     length.toString()
   ) { it.length >= length }
 }
 
-fun ValidationBuilder<String>.maxLength(length: Int): Constraint<String> {
+fun ValidationRuleBuilder<String>.maxLength(length: Int): Validator<String> {
   require(length >= 0) { IllegalArgumentException("maxLength requires the length to be >= 0") }
-  return addConstraint(
+  return addValidator(
     "must have at most {0} characters",
     length.toString()
   ) { it.length <= length }
 }
 
-fun ValidationBuilder<String>.pattern(pattern: String) =
+fun ValidationRuleBuilder<String>.pattern(pattern: String) =
   pattern(pattern.toRegex())
 
-fun ValidationBuilder<String>.pattern(pattern: Regex) =
-  addConstraint(
+fun ValidationRuleBuilder<String>.pattern(pattern: Regex) =
+  addValidator(
     "must match the expected pattern",
     pattern.toString()
   ) { it.matches(pattern) }
 
-fun ValidationBuilder<String>.email() =
-  addConstraint("must be a valid email address") {
+fun ValidationRuleBuilder<String>.email() =
+  addValidator("must be a valid email address") {
     "[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}".toRegex().matches(it)
   }
 
-inline fun <reified T> ValidationBuilder<T>.minItems(minSize: Int): Constraint<T> =
-  addConstraint(
+inline fun <reified T> ValidationRuleBuilder<T>.minItems(minSize: Int): Validator<T> =
+  addValidator(
     "must have at least {0} items",
     minSize.toString()
   ) {
@@ -104,8 +104,8 @@ inline fun <reified T> ValidationBuilder<T>.minItems(minSize: Int): Constraint<T
     }
   }
 
-inline fun <reified T> ValidationBuilder<T>.maxItems(maxSize: Int): Constraint<T> =
-  addConstraint(
+inline fun <reified T> ValidationRuleBuilder<T>.maxItems(maxSize: Int): Validator<T> =
+  addValidator(
     "must have at most {0} items",
     maxSize.toString()
   ) {
@@ -117,17 +117,11 @@ inline fun <reified T> ValidationBuilder<T>.maxItems(maxSize: Int): Constraint<T
     }
   }
 
-inline fun <reified T: Map<*, *>> ValidationBuilder<T>.minProperties(minSize: Int): Constraint<T> =
-  minItems(minSize) hint "must have at least {0} properties"
-
-inline fun <reified T: Map<*, *>> ValidationBuilder<T>.maxProperties(maxSize: Int): Constraint<T> =
-  maxItems(maxSize) hint "must have at most {0} properties"
-
-inline fun <reified T> ValidationBuilder<T>.uniqueItems(unique: Boolean): Constraint<T> =
-  addConstraint(
+inline fun <reified T> ValidationRuleBuilder<T>.uniqueItems(): Validator<T> =
+  addValidator(
     "all items must be unique"
   ) {
-    !unique || when (it) {
+    when (it) {
       is Iterable<*> -> it.distinct().count() == it.count()
       is Array<*> -> it.distinct().count() == it.count()
       else -> throw IllegalStateException("uniqueItems can not be applied to type ${T::class}")

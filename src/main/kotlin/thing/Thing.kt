@@ -12,4 +12,7 @@ interface Thing<T> {
 
   @Suppress("UNCHECKED_CAST")
   fun validate(): ValidationResult<T> = rule.validate(this as T)
+
+  @Suppress("UNCHECKED_CAST")
+  fun redact(): T = rule.redact(this as T)
 }
