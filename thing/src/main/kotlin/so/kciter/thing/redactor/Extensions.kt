@@ -1,4 +1,4 @@
-package thing.redactor
+package so.kciter.thing.redactor
 
 fun RedactionRuleBuilder<String>.email() =
   addRedactor("[REDACTED]") {

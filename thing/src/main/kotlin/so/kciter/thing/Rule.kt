@@ -1,10 +1,10 @@
-package thing
+package so.kciter.thing
 
-import thing.normalizer.NormalizationRule
-import thing.redactor.RedactionRule
-import thing.validator.ValidationRule
-import thing.validator.ValidationResult
-import thing.validator.combineWith
+import so.kciter.thing.normalizer.NormalizationRule
+import so.kciter.thing.redactor.RedactionRule
+import so.kciter.thing.validator.ValidationRule
+import so.kciter.thing.validator.ValidationResult
+import so.kciter.thing.validator.combineWith
 
 class Rule<T>(
   private val validationRules: List<ValidationRule<T>>,

@@ -1,6 +1,6 @@
-package thing
+package so.kciter.thing
 
-import thing.validator.ValidationResult
+import so.kciter.thing.validator.ValidationResult
 
 
 interface Thing<T> {

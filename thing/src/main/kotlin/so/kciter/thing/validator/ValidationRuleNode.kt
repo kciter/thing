@@ -1,4 +1,4 @@
-package thing.validator
+package so.kciter.thing.validator
 
 internal class ValidationRuleNode<T>(
   private val validators: List<Validator<T>>,

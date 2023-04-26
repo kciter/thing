@@ -1,4 +1,4 @@
-package thing.validator
+package so.kciter.thing.validator
 
 inline fun <reified T> ValidationRuleBuilder<*>.type() =
   addValidator(

@@ -1,4 +1,4 @@
-package thing.redactor
+package so.kciter.thing.redactor
 
 internal class RedactionRuleNode<T>(
   private val fieldName: String?,

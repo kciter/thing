@@ -1,4 +1,4 @@
-package thing.normalizer
+package so.kciter.thing.normalizer
 
 internal class NormalizationRuleNode<T>(
   private val fieldName: String?,

@@ -1,4 +1,4 @@
-package thing.validator
+package so.kciter.thing.validator
 
 import kotlin.reflect.KProperty1
 

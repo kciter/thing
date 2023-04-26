@@ -1,4 +1,4 @@
-package thing.normalizer
+package so.kciter.thing.normalizer
 
 import java.util.*
 

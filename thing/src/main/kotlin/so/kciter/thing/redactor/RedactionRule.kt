@@ -1,4 +1,4 @@
-package thing.redactor
+package so.kciter.thing.redactor
 
 interface RedactionRule<T> {
   companion object {
