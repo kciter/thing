@@ -6,7 +6,6 @@ import so.kciter.thing.redactor.RedactionRule
 import so.kciter.thing.redactor.RedactionRuleBuilder
 import so.kciter.thing.validator.ValidationRule
 import so.kciter.thing.validator.ValidationRuleBuilder
-import thing.validator.*
 
 @DslMarker
 annotation class RuleDsl

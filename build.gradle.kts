@@ -1,26 +1,30 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "1.7.20"
 }
 
-group = "kciter"
-version = "1.0.0"
-
-repositories {
+allprojects {
+  repositories {
     mavenCentral()
+  }
 }
 
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    testImplementation(kotlin("test"))
+subprojects {
+  group = "so.kciter"
+  version = "1.0.0"
+
+
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+tasks {
+  compileKotlin {
+    kotlinOptions {
+      jvmTarget = "11"
+    }
+  }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+  compileTestKotlin {
+    kotlinOptions {
+      jvmTarget = "11"
+    }
+  }
 }

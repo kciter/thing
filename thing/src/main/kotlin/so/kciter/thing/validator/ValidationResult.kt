@@ -76,7 +76,7 @@ internal fun <R> ValidationResult<R>.mapError(keyTransform: (String) -> String):
   return when (this) {
     is ValidationResult.Valid -> this
     is ValidationResult.Invalid -> ValidationResult.Invalid(this.internalErrors.mapKeys { (key, _) ->
-      key
+      keyTransform(key)
     })
   }
 }
