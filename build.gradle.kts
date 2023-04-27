@@ -23,6 +23,7 @@ subprojects {
   apply(plugin = "signing")
 
   group = "so.kciter"
+  version = "0.0.3"
 
   tasks {
     compileKotlin {
