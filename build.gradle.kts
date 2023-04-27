@@ -120,6 +120,11 @@ subprojects {
           url.set("https://github.com/kciter/thing/actions?query=workflow%3Aci")
         }
       }
+
+      configure<SigningExtension> {
+        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        sign(publications)
+      }
     }
   }
 }
