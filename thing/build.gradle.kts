@@ -1,12 +1,10 @@
+val artifactId = "thing"
+
 description = "A rule-based entity management library written in Kotlin"
 
 plugins {
   `maven-publish`
-  signing
 }
-
-apply(plugin = "kotlin")
-apply(plugin = "maven-publish")
 
 dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
@@ -16,9 +14,9 @@ dependencies {
 
 publishing {
   publications {
-    create<MavenPublication>("thing") {
+    create<MavenPublication>(artifactId) {
       groupId = "${project.group}"
-      artifactId = "thing"
+      artifactId = artifactId
       version = "0.0.1"
       pom {
         description.set(project.description)

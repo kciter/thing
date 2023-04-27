@@ -22,6 +22,7 @@ allprojects {
 subprojects {
   apply(plugin = "kotlin")
   apply(plugin = "maven-publish")
+  apply(plugin = "signing")
 
   group = "so.kciter"
 
@@ -56,7 +57,7 @@ subprojects {
     }
   }
 
-  publishing {
+  configure<PublishingExtension> {
     repositories {
       maven {
         if (project.version.toString().endsWith("SNAPSHOT")) {
@@ -120,11 +121,11 @@ subprojects {
           url.set("https://github.com/kciter/thing/actions?query=workflow%3Aci")
         }
       }
-
-      configure<SigningExtension> {
-        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-        sign(publications)
-      }
     }
+  }
+
+  signing {
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    sign(publishing.publications)
   }
 }
