@@ -1,5 +1,6 @@
 package so.kciter.thing.example
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import so.kciter.thing.Rule
 import so.kciter.thing.Thing
 import so.kciter.thing.normalizer.trim
@@ -13,6 +14,7 @@ data class Person(
   val email: String,
   val creditCard: String
 ): Thing<Person> {
+  @get:JsonIgnore
   override val rule: Rule<Person>
     get() = Rule {
       Normalization {
