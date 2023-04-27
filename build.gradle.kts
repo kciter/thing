@@ -13,7 +13,6 @@ plugins {
 
 allprojects {
   repositories {
-    mavenLocal()
     mavenCentral()
   }
 }
@@ -24,6 +23,7 @@ subprojects {
   apply(plugin = "signing")
 
   group = "so.kciter"
+  version = "0.0.3"
 
   tasks {
     compileKotlin {
@@ -102,6 +102,11 @@ subprojects {
         }
 
         contributors {
+          contributor {
+            name.set("Oh Sally")
+            email.set("min27604@gmail.com")
+            url.set("https://github.com/sallyjellyy")
+          }
         }
 
         scm {
