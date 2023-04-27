@@ -6,7 +6,9 @@ val signingKey: String? by project
 val signingPassword: String? by project
 
 plugins {
+  id("io.spring.dependency-management") version "1.0.11.RELEASE"
   kotlin("jvm") version "1.7.20"
+  kotlin("kapt") version "1.7.10"
   `maven-publish`
   signing
 }

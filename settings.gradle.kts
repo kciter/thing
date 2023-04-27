@@ -1,5 +1,6 @@
 rootProject.name = "thing"
 
 include(
-  "thing"
+  "thing",
+  "thing-spring"
 )
