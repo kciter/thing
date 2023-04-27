@@ -2,6 +2,7 @@ description = "A rule-based entity management library written in Kotlin"
 
 plugins {
   `maven-publish`
+  signing
 }
 
 apply(plugin = "kotlin")
