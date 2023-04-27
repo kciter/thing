@@ -17,7 +17,7 @@ publishing {
     create<MavenPublication>(artifactId) {
       groupId = "${project.group}"
       artifactId = artifactId
-      version = "0.0.1"
+      version = "0.0.2"
       pom {
         description.set(project.description)
       }
