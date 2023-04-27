@@ -140,6 +140,7 @@ inline fun <reified T> ValidationRuleBuilder<T>.notEmpty(): Validator<T> =
     }
   }
 
+@JvmName("notEmptyString")
 fun ValidationRuleBuilder<String>.notEmpty(): Validator<String> =
   addValidator(
     "must not be empty"
