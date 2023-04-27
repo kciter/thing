@@ -102,6 +102,11 @@ subprojects {
         }
 
         contributors {
+          contributor {
+            name.set("Oh Sally")
+            email.set("min27604@gmail.com")
+            url.set("https://github.com/sallyjellyy")
+          }
         }
 
         scm {
