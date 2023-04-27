@@ -15,7 +15,6 @@ allprojects {
   repositories {
     mavenLocal()
     mavenCentral()
-    maven(url = "https://plugins.gradle.org/m2/")
   }
 }
 
@@ -61,9 +60,9 @@ subprojects {
     repositories {
       maven {
         if (project.version.toString().endsWith("SNAPSHOT")) {
-          setUrl("https://oss.sonatype.org/content/repositories/snapshots")
+          setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         } else {
-          setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+          setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         }
 
         credentials {
