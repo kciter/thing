@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v3
@@ -22,6 +23,8 @@ jobs:
   publish:
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.build.result == 'success'
+
+    runs-on: ubuntu-latest
 
     env:
       ORG_GRADLE_PROJECT_ossrhUsername: ${{ secrets.OSSRH_USERNAME }}
