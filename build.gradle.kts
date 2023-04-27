@@ -127,8 +127,8 @@ subprojects {
     }
   }
 
-//  signing {
-//    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-//    sign(publishing.publications)
-//  }
+  signing {
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    sign(publishing.publications)
+  }
 }
