@@ -59,13 +59,13 @@ val person = Person(
 )
 
 println(person)
-// Person(email= kciter@naver.com   , creditCard=1234-1234-1234-1234)
+// Person(email= kciter@naver   , creditCard=1234-1234-1234-1234)
 println(person.normalize())
-// Person(email=kciter@naver.com, creditCard=1234-1234-1234-1234)
+// Person(email=kciter@naver, creditCard=1234-1234-1234-1234)
 println(person.validate())
 // ValidationResult.Invalid(dataPath=.email, message=must be a valid email address)
 println(person.redact())
-// Person(email=kciter@naver.com, creditCard=[REDACTED])
+// Person(email=kciter@naver, creditCard=[REDACTED])
 ```
 
 ## :sparkles: Usecase
