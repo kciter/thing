@@ -1,5 +1,5 @@
 <h1 align='center'>
-  Thing 💫
+  Thing :dizzy:
 </h1>
 
 <p align="center"><strong>A rule-based entity management library written in Kotlin</strong></p>
@@ -16,7 +16,7 @@
   </a>
 </p>
 
-## 🚀 Getting started
+## :rocket: Getting started
 depend via Maven:
 ```xml
 <dependency>
@@ -30,7 +30,7 @@ or Gradle:
 implementation("so.kciter:thing:1.0.0")
 ```
 
-## 👀 At a glance
+## :eyes: At a glance
 ```kotlin
 data class Person(
   val email: String,
@@ -68,18 +68,18 @@ println(person.redact())
 // Person(email=kciter@naver.com, creditCard=[REDACTED])
 ```
 
-## ✨ Usecase
+## :sparkles: Usecase
 
 ### Validation
 ### Normalization
 ### Redaction
 ### With Spring Boot
 
-## 💌 Reference
+## :love_letter: Reference
 * [konform](https://github.com/konform-kt/konform)
 * [kotlin-validator](https://github.com/amir1376/kotlin-validator)
 * [redact-pii](https://github.com/solvvy/redact-pii)
 
-## 📄 License
+## :page_facing_up: License
 
 Thing is made available under the [MIT License](./LICENSE).
