@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+so.kciter.thing.configuration.ThingPostProcessor
