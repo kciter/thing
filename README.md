@@ -22,7 +22,7 @@ depend via Maven:
 <dependency>
   <groupId>so.kciter</groupId>
   <artifactId>thing</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 or Gradle:
@@ -74,6 +74,11 @@ println(person.redact())
 ### Normalization
 ### Redaction
 ### With Spring Boot
+
+## 💌 Reference
+* [konform](https://github.com/konform-kt/konform)
+* [kotlin-validator](https://github.com/amir1376/kotlin-validator)
+* [redact-pii](https://github.com/solvvy/redact-pii)
 
 ## 📄 License
 

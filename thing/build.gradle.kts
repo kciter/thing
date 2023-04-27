@@ -1,10 +1,10 @@
 description = "A rule-based entity management library written in Kotlin"
 
 plugins {
-  kotlin("jvm")
   `maven-publish`
 }
 
+apply(plugin = "kotlin")
 apply(plugin = "maven-publish")
 
 dependencies {
@@ -14,11 +14,14 @@ dependencies {
 }
 
 publishing {
-  publications.withType<MavenPublication> {
-    groupId = "${project.group}"
-    artifactId = "thing"
-    pom {
-      description.set(project.description)
+  publications {
+    create<MavenPublication>("thing") {
+      groupId = "${project.group}"
+      artifactId = "thing"
+      version = "0.0.1"
+      pom {
+        description.set(project.description)
+      }
     }
   }
 }
