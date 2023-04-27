@@ -98,9 +98,9 @@ inline fun <reified T> ValidationRuleBuilder<T>.minItems(minSize: Int): Validato
   ) {
     when (it) {
       is Iterable<*> -> it.count() >= minSize
-      is Array<*> -> it.count() >= minSize
-      is Map<*, *> -> it.count() >= minSize
-      else -> throw IllegalStateException("minItems can not be applied to type ${T::class}")
+      is Array<*>    -> it.count() >= minSize
+      is Map<*, *>   -> it.count() >= minSize
+      else           -> throw IllegalStateException("minItems can not be applied to type ${T::class}")
     }
   }
 
@@ -111,9 +111,9 @@ inline fun <reified T> ValidationRuleBuilder<T>.maxItems(maxSize: Int): Validato
   ) {
     when (it) {
       is Iterable<*> -> it.count() <= maxSize
-      is Array<*> -> it.count() <= maxSize
-      is Map<*, *> -> it.count() <= maxSize
-      else -> throw IllegalStateException("maxItems can not be applied to type ${T::class}")
+      is Array<*>    -> it.count() <= maxSize
+      is Map<*, *>   -> it.count() <= maxSize
+      else           -> throw IllegalStateException("maxItems can not be applied to type ${T::class}")
     }
   }
 
@@ -123,7 +123,24 @@ inline fun <reified T> ValidationRuleBuilder<T>.uniqueItems(): Validator<T> =
   ) {
     when (it) {
       is Iterable<*> -> it.distinct().count() == it.count()
-      is Array<*> -> it.distinct().count() == it.count()
-      else -> throw IllegalStateException("uniqueItems can not be applied to type ${T::class}")
+      is Array<*>    -> it.distinct().count() == it.count()
+      else           -> throw IllegalStateException("uniqueItems can not be applied to type ${T::class}")
     }
   }
+
+inline fun <reified T> ValidationRuleBuilder<T>.notEmpty(): Validator<T> =
+  addValidator(
+    "must not be empty"
+  ) {
+    when (it) {
+      is Iterable<*> -> it.count() != 0
+      is Array<*>    -> it.isNotEmpty()
+      is Map<*, *>   -> it.isNotEmpty()
+      else           -> throw IllegalStateException("notEmpty can not be applied to type ${T::class}")
+    }
+  }
+
+fun ValidationRuleBuilder<String>.notEmpty(): Validator<String> =
+  addValidator(
+    "must not be empty"
+  ) { it.isNotEmpty() }
