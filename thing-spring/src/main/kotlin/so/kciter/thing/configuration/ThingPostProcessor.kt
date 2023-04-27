@@ -4,10 +4,10 @@ import org.springframework.aop.framework.autoproxy.AbstractBeanFactoryAwareAdvis
 import org.springframework.aop.support.DefaultPointcutAdvisor
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut
 import org.springframework.beans.factory.InitializingBean
-import org.springframework.stereotype.Component
+import org.springframework.context.annotation.Configuration
 
-@Component
-class ThingPostProcessor: AbstractBeanFactoryAwareAdvisingPostProcessor(), InitializingBean {
+@Configuration
+open class ThingPostProcessor: AbstractBeanFactoryAwareAdvisingPostProcessor(), InitializingBean {
   override fun afterPropertiesSet() {
     val pointcut = AnnotationMatchingPointcut(ThingHandler::class.java, true)
     advisor = DefaultPointcutAdvisor(pointcut, ThingInterceptor())
