@@ -165,6 +165,8 @@ You can use the `@ThingHandler` annotation instead of the `@Validated` annotatio
 
 If the Controller contains the `@ThingHandler` annotation, `ThingPostProcessor` check to see if a `Thing` object exists when the function is executed. If a `Thing` object exists, it normalizes it before running the function and then performs validation. And when we return the result, if it's a `Thing` object, we return it after redacting.
 
+<img src="./images/process.png" style="width: 100%">
+
 ```kotlin
 @ThingHandler
 @RestController
@@ -177,8 +179,6 @@ class ApiController {
 }
 ```
 
-<img src="./images/process.png" style="width: 100%">
-
 Instead of adding an annotation to a class, you can also add it to a method. In this case, it will only work on specific methods, not the class as a whole.
 
 ```kotlin
@@ -186,6 +186,70 @@ Instead of adding an annotation to a class, you can also add it to a method. In 
 @PostMapping
 fun createPerson(@RequestBody person: Person): AnyResponse {
   /* ... */
+}
+```
+
+#### 🆚 Bean Validation
+|                              | Thing          | Bean Validation     |
+|------------------------------|----------------|---------------------|
+| How to use                   | Kotlin DSL     | Annotation          |
+| Custom Validation            | Easy to extend | Difficult to extend |
+| Nested                       | Easy           | Confuse             |
+| Support Iterable, Array, Map | ✅              | ❌                   |
+| Validation                   | ✅              | ✅                   |
+| Normalization                | ✅              | ❌                   |
+| Redaction                    | ✅              | ❌                   |
+| Can use with Spring Boot     | ✅              | ✅                   |
+
+Bean Validation is a great library. However, it is not suitable for all cases. For example, if you want to normalize or redact data, you can't do it with Bean Validation. In this case, you can use Thing.
+
+### Nested
+Thing supports nested data. For example, if you have a `Group` object that contains a `person` field, you can use it as follows:
+
+```kotlin
+data class Person(
+  val name: String,
+  val email: String
+)
+
+data class Group(
+  val person: Person
+): Thing<Group> {
+  override val rule: Rule<Group>
+    get() = Rule {
+      Validation {
+        Group::person {
+          Person::name { notEmpty() }
+          Person::email { email() }
+        }
+      }
+    }
+}
+```
+
+### Iterable, Array, Map
+Thing supports `Iterable`, `Array`, and `Map` types. For example, if you have a `Group` object that contains a `people` field, you can use it as follows:
+
+```kotlin
+data class Person(
+  val name: String,
+  val email: String
+)
+
+data class Group(
+  val people: List<Person>
+): Thing<Group> {
+  override val rule: Rule<Group>
+    get() = Rule {
+      Validation {
+        Group::people {
+          onEach {
+            Person::name { notEmpty() }
+            Person::email { email() }
+          }
+        }
+      }
+    }
 }
 ```
 
