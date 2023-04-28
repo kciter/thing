@@ -47,5 +47,4 @@ jobs:
         with:
           java-version: 11
       - run: >
-          ./gradlew
-          publishThingPublicationToMavenRepository
+          ./gradlew publish
