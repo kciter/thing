@@ -11,7 +11,7 @@
   <a href="">
     <img src='https://img.shields.io/maven-central/v/so.kciter/thing' alt='Latest version'>
   </a>
-  <a href="https://github.com/cobaltinc/vortex/blob/master/.github/CONTRIBUTING.md">
+  <a href="">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
 </p>
