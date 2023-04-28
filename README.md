@@ -8,7 +8,7 @@
   <a href="https://cobalt.run">
     <img src="https://cobalt-static.s3.ap-northeast-2.amazonaws.com/cobalt-badge.svg" />
   </a>
-  <a href="">
+  <a href="https://central.sonatype.com/artifact/so.kciter/thing">
     <img src='https://img.shields.io/maven-central/v/so.kciter/thing' alt='Latest version'>
   </a>
   <a href="">
