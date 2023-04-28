@@ -252,6 +252,25 @@ fun RedactionRuleBuilder<String>.redactBar() {
     it.contains("bar")
   }
 }
+
+data class Foo(
+  val data: String
+): Thing<Person> {
+  override val rule: Rule<Foo>
+    get() = Rule {
+      Normalization {
+        Foo::data { replaceBarToFoo() }
+      }
+
+      Validation {
+        Foo::data { isBar() }
+      }
+
+      Redaction {
+        Foo::data { redactBar() }
+      }
+    }
+}
 ```
 
 ## :love_letter: Reference
