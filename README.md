@@ -176,6 +176,9 @@ class ApiController {
   }
 }
 ```
+
+<img src="./images/process.png" style="width: 100%">
+
 Instead of adding an annotation to a class, you can also add it to a method. In this case, it will only work on specific methods, not the class as a whole.
 
 ```kotlin
