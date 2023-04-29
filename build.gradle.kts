@@ -7,6 +7,7 @@ val signingPassword: String? by project
 
 plugins {
   kotlin("jvm") version "1.7.20"
+  kotlin("kapt") version "1.7.20"
   `maven-publish`
   signing
 }
@@ -19,11 +20,13 @@ allprojects {
 
 subprojects {
   apply(plugin = "kotlin")
+  apply(plugin = "kotlin-kapt")
   apply(plugin = "maven-publish")
   apply(plugin = "signing")
+  apply(plugin = "kotlin-kapt")
 
   group = "so.kciter"
-  version = "0.0.3"
+  version = "0.0.4"
 
   tasks {
     compileKotlin {
