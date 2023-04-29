@@ -6,10 +6,12 @@ import org.springframework.aop.support.ComposablePointcut
 import org.springframework.aop.support.DefaultPointcutAdvisor
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Configuration
 
 
 @Configuration
+@ConditionalOnWebApplication
 open class ThingPostProcessor: AbstractBeanFactoryAwareAdvisingPostProcessor(), InitializingBean {
   override fun afterPropertiesSet() {
     val classPointcut = AnnotationMatchingPointcut(ThingHandler::class.java, true)
