@@ -189,6 +189,24 @@ fun createPerson(@RequestBody person: Person): AnyResponse {
 }
 ```
 
+Unfortunately, `rule` property is not ignored yet from this library. So, you need to add `@JsonIgnore` annotation to `rule` property.
+
+```kotlin
+data class Person(
+  val email: String
+): Thing<Person> {
+  @JsonIgnore
+  override val rule: Rule<Person>
+    get() = Rule {
+      Validation {
+        Person::email { email() }
+      }
+    }
+}
+```
+
+If you want more detail, see [thing-spring-example](./thing-spring-example).
+
 #### 🆚 Bean Validation
 |                              | Thing          | Bean Validation     |
 |------------------------------|----------------|---------------------|
