@@ -23,7 +23,6 @@ subprojects {
   apply(plugin = "kotlin-kapt")
   apply(plugin = "maven-publish")
   apply(plugin = "signing")
-  apply(plugin = "kotlin-kapt")
 
   group = "so.kciter"
   version = "0.0.4"
@@ -41,20 +40,7 @@ subprojects {
       }
     }
 
-    val sourcesJar by creating(Jar::class) {
-      archiveClassifier.set("sources")
-      from(sourceSets.main.get().allSource)
-    }
-
-    val javadocJar by creating(Jar::class) {
-      dependsOn.add(javadoc)
-      archiveClassifier.set("javadoc")
-      from(javadoc)
-    }
-
     artifacts {
-      archives(sourcesJar)
-      archives(javadocJar)
       archives(jar)
     }
   }
@@ -77,9 +63,6 @@ subprojects {
 
     publications.withType<MavenPublication> {
       from(components["java"])
-
-      artifact(tasks["sourcesJar"])
-      artifact(tasks["javadocJar"])
 
       pom {
         packaging = "jar"
