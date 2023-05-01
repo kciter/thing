@@ -6,11 +6,13 @@ import org.springframework.aop.support.ComposablePointcut
 import org.springframework.aop.support.DefaultPointcutAdvisor
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Configuration
-
+import so.kciter.thing.Thing
 
 @Configuration
+@ConditionalOnClass(Thing::class)
 @ConditionalOnWebApplication
 open class ThingPostProcessor: AbstractBeanFactoryAwareAdvisingPostProcessor(), InitializingBean {
   override fun afterPropertiesSet() {
@@ -20,4 +22,3 @@ open class ThingPostProcessor: AbstractBeanFactoryAwareAdvisingPostProcessor(), 
     advisor = DefaultPointcutAdvisor(composedPointcut, ThingInterceptor())
   }
 }
-

@@ -4,10 +4,7 @@ import kotlin.reflect.KClass
 
 @Target(
   AnnotationTarget.CLASS,
-  AnnotationTarget.FUNCTION,
-  AnnotationTarget.PROPERTY_GETTER,
-  AnnotationTarget.PROPERTY_SETTER,
-  AnnotationTarget.VALUE_PARAMETER
+  AnnotationTarget.FUNCTION
 )
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ThingHandler(

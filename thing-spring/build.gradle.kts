@@ -1,23 +1,26 @@
 val artifactId = "thing-spring"
-val springBootVersion = "2.7.0"
 
 description = "Thing for Spring Boot"
 
 plugins {
+  id("io.spring.dependency-management") version "1.0.15.RELEASE"
+  id("org.springframework.boot") version "2.7.6" apply false
   kotlin("jvm") version "1.7.20"
   kotlin("kapt") version "1.7.20"
-  id("io.spring.dependency-management") version "1.0.11.RELEASE"
   `maven-publish`
 }
 
-dependencies {
-  kapt("org.springframework.boot:spring-boot-autoconfigure-processor:${springBootVersion}")
-  kapt("org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}")
+ext["kotlin.version"] = "1.7.20"
 
-  implementation(project(":thing"))
-  implementation("org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}")
-  implementation("org.springframework.boot:spring-boot-starter:${springBootVersion}")
-  implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+dependencies {
+  compileOnly(project(":thing"))
+  compileOnly("org.springframework.boot:spring-boot-starter-web")
+}
+
+dependencyManagement {
+  imports {
+    mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+  }
 }
 
 publishing {
