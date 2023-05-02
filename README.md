@@ -189,7 +189,7 @@ fun createPerson(@RequestBody person: Person): AnyResponse {
 }
 ```
 
-Unfortunately, `rule` property is not ignored yet from this library. So, you need to add `@JsonIgnore` annotation to `rule` property.
+Unfortunately, this library has not yet ignored a response with `rule` property. So, when responding to the `Thing` entity, you need to add `@JsonIgnore` annotation to `rule` property.
 
 ```kotlin
 data class Person(
