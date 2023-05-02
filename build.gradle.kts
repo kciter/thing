@@ -96,7 +96,7 @@ subprojects {
         developers {
           developer {
             id.set("kciter")
-            name.set("Lee Sun-Hyoup")
+            name.set("Sunhyoup Lee")
             email.set("kciter@naver.com")
             url.set("https://github.com/kciter")
             timezone.set("Asia/Seoul")
