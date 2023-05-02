@@ -145,3 +145,8 @@ fun ValidationRuleBuilder<String>.notEmpty(): Validator<String> =
   addValidator(
     "must not be empty"
   ) { it.isNotEmpty() }
+
+fun ValidationRuleBuilder<String>.notBlank(): Validator<String> =
+  addValidator(
+    "must not be blank"
+  ) { it.isNotBlank() }
