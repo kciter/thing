@@ -150,3 +150,15 @@ fun ValidationRuleBuilder<String>.notBlank(): Validator<String> =
   addValidator(
     "must not be blank"
   ) { it.isNotBlank() }
+
+fun <T: Number> ValidationRuleBuilder<T>.positive(): Validator<T> =
+  addValidator("must be a positive number") { it.toDouble() > 0 }
+
+fun <T: Number> ValidationRuleBuilder<T>.negative(): Validator<T> =
+  addValidator("must be a negative number") { it.toDouble() < 0 }
+
+fun <T: Number> ValidationRuleBuilder<T>.positiveOrZero(): Validator<T> =
+  addValidator("must be a positive number or zero") { it.toDouble() >= 0 }
+
+fun <T: Number> ValidationRuleBuilder<T>.negativeOrZero(): Validator<T> =
+  addValidator("must be a negative number or zero") { it.toDouble() <= 0 }
