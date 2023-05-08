@@ -7,9 +7,9 @@ import so.kciter.thing.validator.ValidationResult
 import so.kciter.thing.validator.combineWith
 
 class Rule<T>(
-  private val validationRules: List<ValidationRule<T>>,
-  private val normalizationRules: List<NormalizationRule<T>>,
-  private val redactionRules: List<RedactionRule<T>>
+  internal val validationRules: List<ValidationRule<T>>,
+  internal val normalizationRules: List<NormalizationRule<T>>,
+  internal val redactionRules: List<RedactionRule<T>>
 ) {
   companion object {
     operator fun <T> invoke(init: RuleBuilder<T>.() -> Unit): Rule<T> {
