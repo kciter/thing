@@ -14,11 +14,11 @@ class ThingTest {
   @Test
   fun normalizeTest() {
     val person = Person(" kciter ", " kciter@naver.com ", " 1234-1234-1234-1234 ", 100)
-    person.normalize()
+    val normalizedPerson = person.normalize()
 
-    assertEquals(person.username, "kciter")
-    assertEquals(person.email, "kciter@naver.com")
-    assertEquals(person.creditCard, "1234-1234-1234-1234")
+    assertEquals(normalizedPerson.username, "kciter")
+    assertEquals(normalizedPerson.email, "kciter@naver.com")
+    assertEquals(normalizedPerson.creditCard, "1234-1234-1234-1234")
   }
 
   @Test
