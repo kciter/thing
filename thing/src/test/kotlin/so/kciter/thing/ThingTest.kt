@@ -40,8 +40,8 @@ class ThingTest {
   @Test
   fun redactTest() {
     val person = Person("kciter", "kciter@naver.com", "1234-1234-1234-1234", 50)
-    person.redact()
-    assertEquals(person.creditCard, "[REDACTED]")
+    val redactedPerson = person.redact()
+    assertEquals(redactedPerson.creditCard, "[REDACTED]")
   }
 
   data class Person(
