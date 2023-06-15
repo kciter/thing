@@ -127,7 +127,7 @@ println(loginData.normalize()) // Login(email=kciter@naver.com, password=1q2w3e4
 ```
 
 ### Redaction
-Sometimes there's information you don't want to show. In such cases we can use the `Reaction`.
+Sometimes there's information you don't want to show. In such cases we can use the `Redaction`.
 
 For example, card information can be sensitive, so write a condition in the `rule` to redact if the `creditCard` field contains card information.
 ```kotlin
