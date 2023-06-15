@@ -109,6 +109,12 @@ subprojects {
             email.set("min27604@gmail.com")
             url.set("https://github.com/sallyjellyy")
           }
+          
+          contributor {
+            name.set("roach")
+            email.set("dev0jsh@gmail.com")
+            url.set("https://github.com/tmdgusya")
+          }
         }
 
         scm {
