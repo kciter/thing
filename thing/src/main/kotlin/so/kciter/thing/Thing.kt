@@ -1,9 +1,11 @@
 package so.kciter.thing
 
 import so.kciter.thing.validator.ValidationResult
+import java.beans.Transient
 
 
 interface Thing<T> {
+  @get:Transient
   val rule: Rule<T>
     get() = Rule {}
 
