@@ -1,5 +1,9 @@
 package so.kciter.thing.normalizer
 
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.instanceParameter
+import kotlin.reflect.jvm.isAccessible
+
 internal class NormalizationRuleNode<T>(
   private val fieldName: String?,
   private val normalizers: List<Normalizer<T>>,
@@ -14,10 +18,16 @@ internal class NormalizationRuleNode<T>(
     @Suppress("UNCHECKED_CAST")
     return normalizers
       .fold(value) { acc, normalizer ->
-        val f = acc!!::class.java.getDeclaredField(fieldName)
-        f.isAccessible = true
-        f.set(acc, normalizer.transform(f.get(acc) as T))
-        acc
+        val copy = acc!!::class.members.first { it.name == "copy" }
+        val instanceParameter = copy.instanceParameter!!
+        val parameterToBeUpdated = copy.parameters.first { it.name == fieldName }
+        val property = acc!!::class.members.first { it.name == fieldName } as KProperty1<Any, *>
+        copy.callBy(mapOf(instanceParameter to acc, parameterToBeUpdated to normalizer.transform(property.get(acc) as T))) as T
+
+//        val f = acc!!::class.java.getDeclaredField(fieldName)
+//        f.isAccessible = true
+//        f.set(acc, normalizer.transform(f.get(acc) as T))
+//        acc
       }
   }
 

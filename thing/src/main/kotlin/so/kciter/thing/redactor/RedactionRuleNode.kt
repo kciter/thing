@@ -1,5 +1,8 @@
 package so.kciter.thing.redactor
 
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.instanceParameter
+
 internal class RedactionRuleNode<T>(
   private val fieldName: String?,
   private val redactors: List<Redactor>,
@@ -14,12 +17,21 @@ internal class RedactionRuleNode<T>(
     @Suppress("UNCHECKED_CAST")
     return redactors
       .fold(value) { acc, alteration ->
-        val f = acc!!::class.java.getDeclaredField(fieldName)
-        f.isAccessible = true
-        if (alteration.test(f.get(acc) as String)) {
-          f.set(acc, alteration.redactedString)
+        val copy = acc!!::class.members.first { it.name == "copy" }
+        val instanceParameter = copy.instanceParameter!!
+        val parameterToBeUpdated = copy.parameters.first { it.name == fieldName }
+        val property = acc!!::class.members.first { it.name == fieldName } as KProperty1<Any, *>
+        if (alteration.test(property.get(acc) as String)) {
+          copy.callBy(mapOf(instanceParameter to acc, parameterToBeUpdated to alteration.redactedString)) as T
+        } else {
+          acc
         }
-        acc
+//        val f = acc!!::class.java.getDeclaredField(fieldName)
+//        f.isAccessible = true
+//        if (alteration.test(f.get(acc) as String)) {
+//          f.set(acc, alteration.redactedString)
+//        }
+//        acc
       }
   }
 
