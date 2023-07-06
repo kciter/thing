@@ -88,7 +88,7 @@ fun ValidationRuleBuilder<String>.pattern(pattern: Regex) =
 
 fun ValidationRuleBuilder<String>.email() =
   addValidator("must be a valid email address") {
-    "[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}".toRegex().matches(it)
+    "(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))".toRegex().matches(it)
   }
 
 inline fun <reified T> ValidationRuleBuilder<T>.minItems(minSize: Int): Validator<T> =
