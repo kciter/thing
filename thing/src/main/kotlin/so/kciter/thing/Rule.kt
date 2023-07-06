@@ -13,6 +13,17 @@ class Rule<T>(
 ) {
   companion object {
     operator fun <T> invoke(init: RuleBuilder<T>.() -> Unit): Rule<T> {
+//      return if (RuleCache.rules.containsKey(this::class)) {
+//        @Suppress("UNCHECKED_CAST")
+//        RuleCache.rules[this::class] as Rule<T>
+//      } else {
+//        val builder = RuleBuilder<T>()
+//        val rule = builder.apply(init).build()
+//        RuleCache.rules[this::class] = rule
+//
+//        rule
+//      }
+
       val builder = RuleBuilder<T>()
       return builder.apply(init).build()
     }

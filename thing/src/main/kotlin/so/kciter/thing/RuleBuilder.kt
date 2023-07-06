@@ -37,19 +37,10 @@ open class RuleBuilder<T> {
     redactionRules.add(redaction)
   }
 
-  fun build(): Rule<T> {
-    return if (RuleCache.rules.containsKey(this::class)) {
-      @Suppress("UNCHECKED_CAST")
-      RuleCache.rules[this::class] as Rule<T>
-    } else {
-      val rule = Rule(
-        validationRules = validationRules,
-        normalizationRules = normalizationRules,
-        redactionRules = redactionRules
-      )
-      RuleCache.rules[this::class] = rule
-
-      rule
-    }
-  }
+  fun build(): Rule<T> =
+    Rule(
+      validationRules = validationRules,
+      normalizationRules = normalizationRules,
+      redactionRules = redactionRules
+    )
 }

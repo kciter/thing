@@ -25,7 +25,7 @@ subprojects {
   apply(plugin = "signing")
 
   group = "so.kciter"
-  version = "0.0.7"
+  version = "0.0.8"
 
   tasks {
     compileKotlin {
@@ -109,7 +109,7 @@ subprojects {
             email.set("min27604@gmail.com")
             url.set("https://github.com/sallyjellyy")
           }
-          
+
           contributor {
             name.set("roach")
             email.set("dev0jsh@gmail.com")
