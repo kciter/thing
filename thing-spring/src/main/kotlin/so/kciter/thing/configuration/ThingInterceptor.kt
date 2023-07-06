@@ -29,7 +29,7 @@ class ThingInterceptor: MethodInterceptor {
 
     val returnValue = invocation.proceed()
     if (returnValue is Thing<*>) {
-      return returnValue.redact()
+      return (returnValue.normalize() as Thing<*>).redact()
     }
 
     return returnValue
